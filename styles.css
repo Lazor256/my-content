@@ -1,0 +1,595 @@
+/* The Ocean of Knowledge School — Kitchen Management
+   Colors: royal blue, deep red, white, black */
+
+:root {
+  --royal-blue: #1e3a5f;
+  --royal-blue-light: #2c5282;
+  --royal-blue-bg: #0f2744;
+  --deep-red: #b91c1c;
+  --deep-red-hover: #991b1b;
+  --white: #ffffff;
+  --off-white: #f8fafc;
+  --black: #0f172a;
+  --gray: #64748b;
+  --gray-light: #e2e8f0;
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(15, 39, 68, 0.12);
+  --font: 'DM Sans', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--off-white);
+  color: var(--black);
+  min-height: 100vh;
+}
+
+/* Header with logo and school branding */
+.site-header {
+  background: linear-gradient(135deg, var(--royal-blue-bg) 0%, var(--royal-blue) 100%);
+  color: var(--white);
+  padding: 1rem 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.logo {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.tagline {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+/* Tabs */
+.tabs {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 0.25rem;
+  background: var(--white);
+  border-bottom: 2px solid var(--gray-light);
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 0.75rem 1rem;
+  border: none;
+  background: none;
+  font-family: var(--font);
+  font-weight: 500;
+  color: var(--gray);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tab:hover {
+  color: var(--royal-blue);
+}
+
+.tab.active {
+  color: var(--royal-blue);
+  border-bottom-color: var(--deep-red);
+}
+
+/* Content */
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.panel {
+  display: none;
+}
+
+.panel.active {
+  display: block;
+}
+
+.panel h2 {
+  margin: 0 0 1rem;
+  color: var(--royal-blue);
+  font-size: 1.25rem;
+}
+
+.toolbar {
+  margin-bottom: 1rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.05s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn.primary {
+  background: var(--deep-red);
+  color: var(--white);
+}
+
+.btn.primary:hover {
+  background: var(--deep-red-hover);
+}
+
+.btn.secondary {
+  background: var(--gray-light);
+  color: var(--black);
+}
+
+.btn.secondary:hover {
+  background: #cbd5e1;
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+.card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--royal-blue);
+}
+
+.big-number {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--black);
+  margin: 0.25rem 0;
+}
+
+.muted {
+  font-size: 0.875rem;
+  color: var(--gray);
+  margin: 0.25rem 0;
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--gray-light);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--royal-blue), var(--deep-red));
+  transition: width 0.3s;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.tab-link {
+  color: var(--deep-red);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.tab-link:hover {
+  text-decoration: underline;
+}
+
+#dash-preps {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+}
+
+#dash-preps li {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--gray-light);
+}
+
+#dash-preps li:last-child {
+  border-bottom: none;
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.data-table th {
+  background: var(--royal-blue);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.data-table tr:hover td {
+  background: var(--off-white);
+}
+
+.data-table .actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.data-table .btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
+}
+
+/* Meals grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.meal-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--deep-red);
+}
+
+.meal-card h4 {
+  margin: 0 0 0.5rem;
+  color: var(--royal-blue);
+}
+
+.meal-card p {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+  color: var(--gray);
+}
+
+.meal-card .ingredients-list {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+}
+
+.meal-card .ingredients-list li {
+  padding: 0.2rem 0;
+}
+
+.meal-card .card-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Prepare form */
+.prepare-form {
+  max-width: 400px;
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.prepare-form label {
+  display: block;
+  margin: 1rem 0 0.25rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.prepare-form label:first-of-type {
+  margin-top: 0;
+}
+
+.prepare-form select,
+.prepare-form input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--gray-light);
+  border-radius: var(--radius);
+  font-family: var(--font);
+}
+
+.cost-preview {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--off-white);
+  border-radius: var(--radius);
+  font-weight: 600;
+  color: var(--royal-blue);
+}
+
+.message {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+}
+
+.message.success {
+  background: #d1fae5;
+  color: var(--success);
+}
+
+.message.error {
+  background: #fee2e2;
+  color: var(--danger);
+}
+
+/* Budget */
+.budget-setup {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.budget-setup h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1rem;
+  color: var(--royal-blue);
+}
+
+.budget-setup h3:first-child {
+  margin-top: 0;
+}
+
+#budget-form label {
+  display: block;
+  margin: 0.75rem 0 0.25rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+#budget-form input {
+  width: 100%;
+  max-width: 200px;
+  padding: 0.5rem;
+  border: 1px solid var(--gray-light);
+  border-radius: var(--radius);
+  font-family: var(--font);
+}
+
+#budget-form button {
+  margin-top: 1rem;
+}
+
+/* Alerts */
+.alerts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.alert-low h3 {
+  color: var(--warning);
+}
+
+.alert-surplus h3 {
+  color: var(--success);
+}
+
+.alert-low ul,
+.alert-surplus ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+
+.alert-low li,
+.alert-surplus li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--gray-light);
+  font-size: 0.875rem;
+}
+
+.alert-low li:last-child,
+.alert-surplus li:last-child {
+  border-bottom: none;
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 39, 68, 0.5);
+  z-index: 100;
+  display: none;
+}
+
+.modal-overlay.active {
+  display: block;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  z-index: 101;
+  max-width: 480px;
+  width: calc(100% - 2rem);
+  max-height: 90vh;
+  overflow-y: auto;
+  display: none;
+}
+
+.modal.active {
+  display: block;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--gray-light);
+  background: var(--royal-blue);
+  color: var(--white);
+}
+
+.modal-head h3 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 0.25rem;
+}
+
+.modal form {
+  padding: 1.25rem;
+}
+
+.modal label {
+  display: block;
+  margin: 0.75rem 0 0.25rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.modal label:first-of-type {
+  margin-top: 0;
+}
+
+.modal input,
+.modal select,
+.modal textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--gray-light);
+  border-radius: var(--radius);
+  font-family: var(--font);
+}
+
+.modal-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.meal-ingredients-editor {
+  margin-top: 1rem;
+}
+
+.meal-ingredients-editor h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  color: var(--royal-blue);
+}
+
+.meal-ingredient-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 80px;
+  gap: 0.5rem;
+  align-items: end;
+  margin-bottom: 0.5rem;
+}
+
+.meal-ingredient-row select,
+.meal-ingredient-row input {
+  margin: 0;
+}
+
+.meal-ingredient-row .btn-remove {
+  padding: 0.5rem;
+  background: #fee2e2;
+  color: var(--danger);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#btn-add-meal-ingredient {
+  margin-top: 0.5rem;
+}
+
+/* Stock status badges */
+.stock-ok {
+  color: var(--success);
+}
+
+.stock-low {
+  color: var(--warning);
+  font-weight: 600;
+}
+
+.stock-surplus {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--gray);
+  font-size: 0.875rem;
+}
