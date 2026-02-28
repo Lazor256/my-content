@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kitchen Management — The Ocean of Knowledge School</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <img src="assets/logo.png" alt="The Ocean of Knowledge School" class="logo" />
+      <div class="brand">
+        <h1>Kitchen Management</h1>
+        <p class="tagline">The Ocean of Knowledge School · Up with Skills</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button type="button" class="tab active" data-tab="dashboard">Dashboard</button>
+    <button type="button" class="tab" data-tab="inventory">Inventory</button>
+    <button type="button" class="tab" data-tab="meals">Meals</button>
+    <button type="button" class="tab" data-tab="prepare">Prepare Meal</button>
+    <button type="button" class="tab" data-tab="budget">Budget</button>
+    <button type="button" class="tab" data-tab="alerts">Alerts</button>
+  </nav>
+
+  <main class="content">
+    <section id="dashboard" class="panel active">
+      <h2>Dashboard</h2>
+      <div class="dashboard-grid">
+        <div class="card budget-card">
+          <h3>Budget this period</h3>
+          <p class="big-number" id="dash-budget">—</p>
+          <p class="muted">Spent: <span id="dash-spent">—</span> · Remaining: <span id="dash-remaining">—</span></p>
+          <div class="progress-bar"><div class="progress-fill" id="dash-progress" style="width:0%"></div></div>
+        </div>
+        <div class="card alerts-card">
+          <h3>Alerts</h3>
+          <p class="big-number" id="dash-alerts-count">0</p>
+          <p class="muted">Low stock & surplus items</p>
+          <a href="#" class="tab-link" data-tab="alerts">View alerts →</a>
+        </div>
+        <div class="card prep-card">
+          <h3>Recent preparations</h3>
+          <ul id="dash-preps"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="inventory" class="panel">
+      <h2>Inventory</h2>
+      <div class="toolbar">
+        <button type="button" class="btn primary" id="btn-new-ingredient">+ Add ingredient</button>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Unit</th>
+              <th>Stock</th>
+              <th>Min / Max</th>
+              <th>Cost/unit</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="inventory-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="meals" class="panel">
+      <h2>Meals</h2>
+      <div class="toolbar">
+        <button type="button" class="btn primary" id="btn-new-meal">+ Add meal</button>
+      </div>
+      <div class="cards-grid" id="meals-list"></div>
+    </section>
+
+    <section id="prepare" class="panel">
+      <h2>Prepare meal</h2>
+      <div class="prepare-form">
+        <label>Meal</label>
+        <select id="prepare-meal"></select>
+        <label>Portions</label>
+        <input type="number" id="prepare-qty" min="1" value="1" />
+        <div class="cost-preview" id="prepare-cost-preview"></div>
+        <button type="button" class="btn primary" id="btn-prepare">Prepare & deduct</button>
+        <div class="message" id="prepare-message"></div>
+      </div>
+    </section>
+
+    <section id="budget" class="panel">
+      <h2>Budget</h2>
+      <div class="budget-setup">
+        <h3>Current period</h3>
+        <div id="budget-current"></div>
+        <h3>Set budget period</h3>
+        <form id="budget-form">
+          <label>Start date</label>
+          <input type="date" id="budget-start" required />
+          <label>End date</label>
+          <input type="date" id="budget-end" required />
+          <label>Amount (₦)</label>
+          <input type="number" id="budget-amount" step="0.01" min="0" required />
+          <button type="submit" class="btn primary">Save period</button>
+        </form>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Meal</th>
+              <th>Portions</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody id="budget-preps-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="alerts" class="panel">
+      <h2>Stock alerts</h2>
+      <div class="alerts-grid">
+        <div class="card alert-low">
+          <h3>Restock needed (low stock)</h3>
+          <ul id="alerts-low"></ul>
+        </div>
+        <div class="card alert-surplus">
+          <h3>Surplus (above max)</h3>
+          <ul id="alerts-surplus"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modals -->
+  <div class="modal-overlay" id="modal-overlay"></div>
+  <div class="modal" id="modal-ingredient">
+    <div class="modal-head">
+      <h3 id="modal-ingredient-title">Add ingredient</h3>
+      <button type="button" class="modal-close" aria-label="Close">&times;</button>
+    </div>
+    <form id="form-ingredient">
+      <input type="hidden" id="ingredient-id" />
+      <label>Name</label>
+      <input type="text" id="ingredient-name" required />
+      <label>Unit</label>
+      <select id="ingredient-unit"></select>
+      <label>Cost per unit (₦)</label>
+      <input type="number" id="ingredient-cost" step="0.01" min="0" value="0" />
+      <label>Current stock</label>
+      <input type="number" id="ingredient-stock" step="0.001" min="0" value="0" />
+      <label>Min stock (alert below)</label>
+      <input type="number" id="ingredient-min" step="0.001" min="0" value="0" />
+      <label>Max stock (surplus alert above)</label>
+      <input type="number" id="ingredient-max" step="0.001" min="0" placeholder="Optional" />
+      <div class="modal-actions">
+        <button type="button" class="btn secondary modal-cancel">Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+  </div>
+  <div class="modal" id="modal-meal">
+    <div class="modal-head">
+      <h3 id="modal-meal-title">Add meal</h3>
+      <button type="button" class="modal-close" aria-label="Close">&times;</button>
+    </div>
+    <form id="form-meal">
+      <input type="hidden" id="meal-id" />
+      <label>Meal name</label>
+      <input type="text" id="meal-name" required />
+      <label>Description</label>
+      <textarea id="meal-description" rows="2"></textarea>
+      <div class="meal-ingredients-editor">
+        <h4>Ingredients & quantities</h4>
+        <div id="meal-ingredients-list"></div>
+        <button type="button" class="btn secondary" id="btn-add-meal-ingredient">+ Add ingredient</button>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn secondary modal-cancel">Cancel</button>
+        <button type="submit" class="btn primary">Save meal</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
